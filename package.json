@@ -1,18 +1,18 @@
 {
   "name": "typographics",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "typographics provides flexible and adaptive styles for typography on web pages. This package allows you to automate the resizing of fonts based on screen width, ensuring good readability on any device.",
   "type": "module",
-  "author": "ux-ui.pro",
+  "author": "Maxim <m@nilmuse.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ux-ui-pro/typographics.git"
+    "url": "git+https://github.com/nilmuse/typographics.git"
   },
   "bugs": {
-    "url": "https://github.com/ux-ui-pro/typographics/issues"
+    "url": "https://github.com/nilmuse/typographics/issues"
   },
-  "homepage": "https://github.com/ux-ui-pro/typographics",
+  "homepage": "https://github.com/nilmuse/typographics",
   "sideEffects": [
     "dist/*.css"
   ],
