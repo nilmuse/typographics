@@ -302,6 +302,49 @@ $table-text-classes: ".table-text", ".table-text-large", ".table-text-medium", "
 
   }
 
+  :where(blockquote, figure:has(> blockquote)) {
+    font-size: calc(var(--t-body-font-size-clamp) * var(--t-body-scale, 1));
+    line-height: var(--t-line-height-body, 1.5);
+    margin-block: var(--t-quote-space-before, 0.75lh) var(--t-quote-space-after, 0.75lh);
+    margin-inline: var(--t-quote-indent, 1lh);
+
+    @include reset-last-margin;
+  }
+
+  // The figure owns the outer spacing; its direct quote adds none.
+  :where(figure > blockquote) { margin: 0; }
+
+  :where(figure:has(> blockquote) > figcaption) {
+    font-size: var(--t-quote-caption-font-size, inherit);
+    line-height: var(--t-quote-caption-line-height, inherit);
+    margin: 0;
+  }
+
+  :where(figure:has(> blockquote) > blockquote + figcaption) {
+    margin-block-start: var(--t-quote-caption-space, 0.5lh);
+  }
+
+  :where(figure:has(> blockquote) > figcaption:has(+ blockquote)) {
+    margin-block-end: var(--t-quote-caption-space, 0.5lh);
+  }
+
+  // Caption paragraphs inherit its metrics; explicit text utilities still win.
+  :where(figure:has(> blockquote) > figcaption > p) {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+  }
+
+  blockquote > :first-child,
+  :where(figure:has(> blockquote)) > figcaption > :first-child {
+    margin-block-start: 0;
+  }
+
+  blockquote > :last-child,
+  :where(figure:has(> blockquote)) > figcaption > :last-child {
+    margin-block-end: 0;
+  }
+
   :where(table.table-text) {
     @include typography-table-text;
   }

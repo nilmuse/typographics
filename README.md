@@ -1,6 +1,6 @@
 # typographics
 
-CSS typography styles that scale body text and headings between viewport widths, with spacing based on each element's line-height.
+CSS text styles for headings, body text, lists, and code, with font sizes that adapt to the viewport. Customize sizes and spacing with CSS variables.
 
 [![npm](https://img.shields.io/npm/v/typographics.svg?colorB=brightgreen)](https://www.npmjs.com/package/typographics)
 [![NPM Downloads](https://img.shields.io/npm/dm/typographics.svg?style=flat)](https://www.npmjs.com/package/typographics)
@@ -44,7 +44,7 @@ To load the stylesheet through Sass instead of a JavaScript import:
 
 ## Classes
 
-The stylesheet applies typography to native headings, paragraphs, inline code, and code blocks. It also includes these utility classes:
+The stylesheet applies typography to native headings, paragraphs, block quotes, inline code, and code blocks. It also includes these utility classes:
 
 | Classes | Use |
 | --- | --- |
@@ -206,6 +206,61 @@ A custom property is available if you need to control container padding directly
 | Variable                | Default  | Description                                       |
 | :---------------------- | :------: | :------------------------------------------------ |
 | `--t-list-padding-left` | `2.5rem` | Base padding if you build your own list wrappers. |
+
+### Quotes
+
+Native `blockquote` elements receive fluid body sizing and spacing. Add a
+`figure` wrapper when a quote has a `figcaption` attribution:
+
+```html
+<figure>
+  <blockquote>
+    <p class="body-large">The quoted text.</p>
+  </blockquote>
+  <figcaption>— The author</figcaption>
+</figure>
+```
+
+The same spacing works for a figure without a caption and for a standalone
+`blockquote`. A figure with a direct child `blockquote` owns the outer spacing;
+the direct quote has zero margins. Other figures and their captions keep their
+existing styles. A caption can appear before or after the quote.
+
+Quote containers use the fluid body size and local `--t-body-scale`. Text utilities
+inside the quote keep their own sizes. The caption inherits its font size and
+line-height from the figure, along with font family, weight, and color.
+Its direct paragraph children inherit its size and line-height unless they use
+explicit `.body-*` or `.label-*` utilities.
+
+To make an attribution smaller, choose an existing text utility explicitly:
+
+```html
+<figcaption class="body-small">— The author</figcaption>
+```
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--t-quote-space-before` | `0.75lh` | Outer start margin. |
+| `--t-quote-space-after` | `0.75lh` | Outer end margin, trimmed on the parent's last child. |
+| `--t-quote-indent` | `1lh` | Outer margin on each inline side; follows writing direction. |
+| `--t-quote-caption-space` | `0.5lh` | Gap between the quote and its adjacent caption, in caption line-height units. |
+| `--t-quote-caption-font-size` | `inherit` | Inherits the figure's font size; an explicit size bypasses body scaling. |
+| `--t-quote-caption-line-height` | `inherit` | Inherits the figure's line-height. |
+
+Set these properties on `:root`, a container, or the quote figure / standalone
+blockquote. For example:
+
+```css
+.article {
+  --t-quote-indent: 0;
+  --t-quote-caption-space: 0.75lh;
+}
+```
+
+The first direct child of a quote or quote caption has no start margin; the last
+has no end margin. Spacing between the quote's other children stays intact. In
+flex and grid layouts, a container's `gap` adds to the margins. Use unlayered CSS
+or the later `components` / `utilities` layers for direct overrides.
 
 ### Table text
 
