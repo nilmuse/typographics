@@ -215,7 +215,7 @@ Native `blockquote` elements receive fluid body sizing and spacing. Add a
 ```html
 <figure>
   <blockquote>
-    <p class="body-large">The quoted text.</p>
+    <p>The quoted text.</p>
   </blockquote>
   <figcaption>— The author</figcaption>
 </figure>
@@ -231,12 +231,6 @@ inside the quote keep their own sizes. The caption inherits its font size and
 line-height from the figure, along with font family, weight, and color.
 Its direct paragraph children inherit its size and line-height unless they use
 explicit `.body-*` or `.label-*` utilities.
-
-To make an attribution smaller, choose an existing text utility explicitly:
-
-```html
-<figcaption class="body-small">— The author</figcaption>
-```
 
 | Variable | Default | Description |
 | --- | --- | --- |
